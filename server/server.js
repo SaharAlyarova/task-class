@@ -8,17 +8,18 @@ app.use(cors())
 app.use(bodyParser.json())
 const {Schema}=mongoose
 const notarySchema= new Schema(
-    {imgurl:{type:String, required:true}},
     {
-        name:{type:String, required:true}
-    },
-    {
-        job:{type:String, required:true}
-    },
-  {
-    about:{type:String, required:true}
+        imgurl:{type:String, required:true},
+    
+        name:{type:String, required:true},
+    
+    
+        job:{type:String, required:true},
+    
+  
+    about:{type:String, required:true},
   },
-  {timestamp:true}
+  {timestamps:true}
 )
 const Notary=mongoose.model("notaryrow",notarySchema)
 
@@ -52,7 +53,7 @@ app.post("/notaryrow", (req,res)=>{
  let notorpost= new Notary({
 imgurl:req.body.imgurl,
 name:req.body.name,
-job:req.body.obj,
+job:req.body.job,
 about:req.body.about
  })
 

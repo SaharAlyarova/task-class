@@ -88,6 +88,14 @@ const SignupSchema = Yup.object().shape({
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
+    job: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+    about: Yup.string()
+    .min(2, 'Too Short!')
+    .max(350, 'Too Long!')
+    .required('Required'),
 //   email: Yup.string().email('Invalid email').required('Required'),
 });
 const AddPage = () => {
@@ -97,7 +105,8 @@ const AddPage = () => {
        initialValues={{
          imgurl: '',
          name: '',
-         
+         job:'',
+         about:'',
        }}
        validationSchema={SignupSchema}
        onSubmit={values => {
@@ -107,15 +116,27 @@ const AddPage = () => {
      >
        {({ errors, touched }) => (
          <Form>
-           <Field name="imgurl" />
+           <Field name="imgurl" placeholder='imgUrl'/>
            {errors.imgurl && touched.imgurl ? (
              <div style={{color:"red"}}>{errors.imgurl}</div>
            ) : null}
-           <Field name="name" />
+           <br></br>
+           <Field name="name" placeholder='name'/>
            {errors.name && touched.name ? (
              <div style={{color:"red"}}>{errors.name}</div>
            ) : null}
-         
+         <br></br>
+      
+         <Field name="job" placeholder='job'/>
+           {errors.job && touched.job ? (
+             <div style={{color:"red"}}>{errors.job}</div>
+           ) : null}
+           <br></br>
+           <Field name="about" placeholder='about'/>
+           {errors.about && touched.about ? (
+             <div style={{color:"red"}}>{errors.about}</div>
+           ) : null}
+           <br></br>
            <button type="submit">Submit</button>
          </Form>
        )}

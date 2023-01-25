@@ -1,8 +1,6 @@
 import HomePage from "../pages/home/home"
 import {
-  
     Route,Routes
-  
   } from "react-router-dom"
 import AddPage from "../pages/addpage/addpage"
 const RouteCom = () => {
@@ -15,5 +13,4 @@ const RouteCom = () => {
         </div>
     )
 }
-
-export default RouteCom
+export default RouteCom 

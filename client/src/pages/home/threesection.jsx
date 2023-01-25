@@ -3,10 +3,10 @@ import { Button} from 'antd';
 
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 const ThreeSection = () => {
     const [data, setData]=useState([])
-    const {id}=useParams()
+    // const {_id}=useParams()
     const getData=async()=>{
 const data=await axios.get("http://localhost:8080/notaryrow")
 setData(await data.data)
@@ -15,10 +15,10 @@ setData(await data.data)
     getData()
       },[]);
 
-// const handleDelete=(id)=>{
-//     axios.delete(`http://localhost:8080/notaryrow/${id}`)
+const handleDelete=(_id)=>{
+    axios.delete(`http://localhost:8080/notaryrow/${_id}`)
 
-// }
+}
 const handleChange = async (e) => {
     
     const searchDatas = await axios.get("http://localhost:8080/notaryrow") 
@@ -29,7 +29,7 @@ const handleChange = async (e) => {
 
 };
 const handleSort=()=>{
-    const dataSort=data?.sort((a,b)=>a.name>b.name ? 1 : -1)
+    const dataSort=data?.sort((a,b)=>a.name<b.name ? 1 : -1)
     setData([...dataSort])
 }
 
@@ -41,7 +41,7 @@ const handleSort=()=>{
 }} />
 <button onClick={()=>handleSort()}>Sort</button>
            <h1>Happy Customers</h1>
-        <div style={{display:"flex", margin:"2%",textAlign:"center", }}>
+        <div style={{display:"flex", margin:"2%",textAlign:"center",flexWrap:"wrap" }}>
 {
 data.map((el)=>{
     return(
@@ -50,16 +50,16 @@ data.map((el)=>{
        
         <div><img src={el?.imgurl} alt="Avatar" className="avatar"></img></div>
        <div>
-       <p>{el.name}</p>
-        <p>{el.job}</p>
+       <p>{el?.name}</p>
+        <p>{el?.job}</p>
        </div>
         </div>
         <div>
             <p>
-                {el.about}
+                {el?.about}
             </p>
         </div>
-        <Button >Delete</Button>
+        <Button onClick={()=>{handleDelete(el?._id)}} >Delete</Button>
        </div>
     )
 })
